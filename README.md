@@ -10,7 +10,7 @@ $ python -m pip install openaiapi
 
 ## Usage
 
-First, make an `OPENAI_API_KEY` environment variable available whose value is your OpenAI API key. Once you have an API in place, you can use the `OpenAI` class to generate content:
+First, make an `OPENAI_API_KEY` environment variable available whose value is your OpenAI API key. Once you have an API key in place, you can use the `OpenAI` class to generate content:
 
 ```python
 >>> from openaiapi import OpenAI
