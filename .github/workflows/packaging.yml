@@ -111,11 +111,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install cibuildwheel
-        run: python -m pip install cibuildwheel==2.3.1
+      - name: Install build
+        run: python -m pip install build
 
       - name: Build wheels
-        run: python -m cibuildwheel --output-dir wheels
+        run: pyproject-build --wheel --outdir wheels
 
       - uses: actions/upload-artifact@v3
         with:
