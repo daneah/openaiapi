@@ -97,7 +97,7 @@ jobs:
         with:
           path: ./dist/*.tar.gz
 
-  build_wheels:
+  build_wheel:
     name: Build wheel
     runs-on: ubuntu-latest
     steps:
@@ -126,7 +126,7 @@ jobs:
       - typecheck
       - test
       - build_source_dist
-      - build_wheels
+      - build_wheel
     runs-on: ubuntu-latest
 
     steps:
