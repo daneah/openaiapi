@@ -63,8 +63,8 @@ html_static_path = ['_static']
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
-    "apiron": ("https://apiron.readthedocs.org/en/latest/", None),
-    "requests": ("https://docs.python-requests.org/en/master/", None),
+    "apiron": ("https://apiron.readthedocs.io/en/latest/", None),
+    "requests": ("https://docs.python-requests.org/en/latest/", None),
     "urllib3": ("https://urllib3.readthedocs.io/en/latest/", None),
 }
 

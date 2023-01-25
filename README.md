@@ -18,4 +18,4 @@ First, make an `OPENAI_API_KEY` environment variable available whose value is yo
 {..., 'choices': [{'text': '\n\nMy quest is to find my purpose and fulfill it.', ...}], ...}}
 ```
 
-See the package documentation for the full list of available endpoints, and see [the OpenAI documentation](https://beta.openai.com/docs/api-reference/introduction) for the accepted/required parameters to each endpoint.
+See the [package documentation](https://openaiapi.readthedocs.io) for the full list of available endpoints, and see [the OpenAI documentation](https://beta.openai.com/docs/api-reference/introduction) for the accepted/required parameters to each endpoint.
