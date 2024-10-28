@@ -93,7 +93,7 @@ jobs:
       - name: Run build
         run: python -m build --sdist
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: ./dist/*.tar.gz
 
@@ -113,7 +113,7 @@ jobs:
       - name: Build wheels
         run: pyproject-build --wheel --outdir wheels
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: ./wheels/*.whl
 
