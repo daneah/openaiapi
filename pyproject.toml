@@ -2,6 +2,129 @@
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+requires-python = ">=3.9"
+name = "openaiapi"
+version = "0.0.2"
+description = "A light wrapper around the OpenAI API using apiron"
+authors = [
+    { name = "Dane Hillard", email = "github@danehillard.com" },
+]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "apiron>=7.0.0",
+    "urllib3>=1.26.13,<3",
+]
+
+[project.urls]
+Repository = "https://github.com/daneah/openaiapi"
+Changelog = "https://github.com/daneah/openaiapi/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["test*"]
+
+[tool.setuptools.dynamic]
+readme = { file = "README.md", content-type = "text/markdown" }
+
+######################
+# Tool configuration #
+######################
+
 [tool.black]
 line-length = 120
-target-version = ['py39', 'py310', 'py311']
+target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+show_error_context = true
+pretty = true
+namespace_packages = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+addopts = ["--cov", "--strict-markers"]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["openaiapi"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 100.0
+show_missing = true
+skip_covered = true
+
+[tool.coverage.paths]
+source = [
+    "src/openaiapi",
+    "**/site-packages/openaiapi",
+]
+
+[tool.tox]
+envlist = ["py39", "py310", "py311", "py312", "py313"]
+isolated_build = true
+
+[tool.tox.env_run_base]
+package = "wheel"
+wheel_build_env = ".pkg"
+deps = [
+    "pytest",
+    "pytest-cov",
+    "pytest-randomly",
+]
+commands = [
+    ["pytest", { replace = "posargs", default = [], extend = true }],
+]
+
+[tool.tox.env.typecheck]
+deps = [
+    { replace = "ref", of = ["tool", "tox", "env_run_base", "deps"], extend = true },
+    "mypy",
+]
+commands = [
+    ["mypy", { replace = "posargs", default = ["src", "test"], extend = true }],
+]
+
+[tool.tox.env.format]
+skip_install = true
+deps = [
+    "black",
+]
+commands = [
+    ["black", { replace = "posargs", default = ["--check", "--diff", "src", "test"], extend = true }],
+]
+
+[tool.tox.env.lint]
+skip_install = true
+deps = [
+    "ruff",
+]
+commands = [
+    ["ruff", "check", { replace = "posargs", default = ["src", "test"], extend = true }]
+]
+
+[tool.tox.env.docs]
+deps = [
+    "furo",
+    "sphinx",
+]
+commands = [
+    ["sphinx-apidoc", "--force", "--implicit-namespaces", "--module-first", "--separate", "-o", "docs/reference/", "src/openaiapi/"],
+    ["sphinx-build", "-W", "--keep-going", "-b", "html", "docs/", { replace = "posargs", default = ["docs/_build/"], extend = true }],
+]
+
+[tool.tox.env.devdocs]
+deps = [
+    { replace = "ref", of = ["tool", "tox", "env", "docs", "deps"], extend = true },
+    "sphinx-autobuild",
+]
+commands = [
+    ["sphinx-apidoc", "--force", "--implicit-namespaces", "--module-first", "--separate", "-o", "docs/reference/", "src/openaiapi/"],
+    ["sphinx-autobuild", "-W", "-b", "html", "docs/", "docs/_build/"],
+]
