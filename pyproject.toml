@@ -1,18 +1,22 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.11.23,<0.12.0"]
+build-backend = "uv_build"
 
 [project]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 name = "openaiapi"
 version = "0.0.2"
 description = "A light wrapper around the OpenAI API using apiron"
+readme = "README.md"
 authors = [
     { name = "Dane Hillard", email = "github@danehillard.com" },
 ]
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
 ]
 dependencies = [
     "apiron>=7.0.0",
@@ -23,12 +27,8 @@ dependencies = [
 Repository = "https://github.com/daneah/openaiapi"
 Changelog = "https://github.com/daneah/openaiapi/blob/main/CHANGELOG.md"
 
-[tool.setuptools.packages.find]
-where = ["src"]
-exclude = ["test*"]
-
-[tool.setuptools.dynamic]
-readme = { file = "README.md", content-type = "text/markdown" }
+[tool.uv.build-backend]
+module-name = "openaiapi"
 
 ######################
 # Tool configuration #
@@ -36,10 +36,10 @@ readme = { file = "README.md", content-type = "text/markdown" }
 
 [tool.black]
 line-length = 120
-target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
+target-version = ['py311', 'py312', 'py313', 'py314']
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 warn_unused_configs = true
 show_error_context = true
 pretty = true
@@ -67,7 +67,7 @@ source = [
 ]
 
 [tool.tox]
-envlist = ["py39", "py310", "py311", "py312", "py313"]
+env_list = ["py311", "py312", "py313", "py314"]
 isolated_build = true
 
 [tool.tox.env_run_base]
