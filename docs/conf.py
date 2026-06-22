@@ -29,7 +29,6 @@ release = PACKAGE_VERSION
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.autodoc.typehints',
     "sphinx.ext.intersphinx",
 ]
 
