@@ -12,6 +12,6 @@ def test_required_headers(monkeypatch):
     assert OpenAI.required_headers == {"Authorization": "Bearer supersecret"}
 
 
-def test_required_headers_when_no_api_key(monkeypatch):
+def test_required_headers_when_no_api_key():
     with pytest.raises(RuntimeError):
-        OpenAI.required_headers
+        _ = OpenAI.required_headers
